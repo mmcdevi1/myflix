@@ -6,5 +6,15 @@ class UiController < ApplicationController
   layout "application"
 
   def index
+    @videos = Video.all
+  end
+
+  def show 
+    @video = Video.find(params[:id])
+  end
+
+  def home 
+    @categories = Category.all
+    @videos = Video.all
   end
 end
