@@ -1,13 +1,20 @@
 class VideosController < ApplicationController
+  before_action :require_user
+  
   def index
-    @videos = Video.all
+    @videos = Video.first
     @categories = Category.all
   end
 
   def new
+    @video = Video.new
   end
 
   def show
     @video = Video.find(params[:id])
+  end
+
+  def search
+    @results = Video.search_by_title(params[:search])
   end
 end

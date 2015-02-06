@@ -1,0 +1,12 @@
+%h3 Add new video
+.row
+  .col-sm-4
+    = form_for @video do |f|
+      .form-group
+        = f.label :title, "Name"
+        = f.text_field :title, class: "form-control"
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: "form-control"
+      .submit
+        = f.submit "Submit", class: "btn btn-danger"
