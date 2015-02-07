@@ -12,6 +12,7 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt-ruby'
 gem 'faker'
+gem 'fabrication'
 
 group :development do
   gem 'thin'
