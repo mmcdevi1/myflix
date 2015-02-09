@@ -5,6 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.create(full_name: "Michael McDevitt", email: "mmcdevi1@gmail.com", password: "koplop")
+
 10.times do 
   Video.create(title: "Family Guy", 
              description: "Family guy volume 2", 
@@ -26,3 +28,5 @@ Category.create(name: "Comedy")
 Category.create(name: "Horror")
 Category.create(name: "Documentary")
 Category.create(name: "Foreign")
+
+Review.create(content: Faker::Lorem.paragraph(5), rating: 5, user_id: 1, video_id:10)
