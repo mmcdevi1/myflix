@@ -17,7 +17,7 @@ describe VideosController do
       review1 = Fabricate(:review, video: video)
       review2 = Fabricate(:review, video: video)
       get :show, id: video.id
-      assigns(:reivews).should =~ [review1, review2]
+      assigns(:reviews).should =~ [review1, review2]
     end
 
     it "redirects the user to the sign in page" do 

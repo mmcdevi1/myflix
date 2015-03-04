@@ -9,7 +9,8 @@ Myflix::Application.routes.draw do
       post 'search', to: "videos#search"
     end
 
-    resources :reviews, only: :create
+    resources :reviews,  only: :create
+    resources :review2s, only: :create
   end
 
   resources :categories
@@ -22,4 +23,6 @@ Myflix::Application.routes.draw do
 
   get 'queue', to: "queue_items#index"
   resources :queue_items, only: [:create, :destroy]
+
+  post 'update_queue', to: 'queue_items#update_queue'
 end
