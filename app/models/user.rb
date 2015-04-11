@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :reviews
-  has_many :review2s
+  has_many :reviews, -> { order 'created_at' }
   has_many :queue_items, -> { order 'position' }
 
   validates_presence_of :email, :password, :full_name

@@ -7,6 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create(full_name: "Michael McDevitt", email: "mmcdevi1@gmail.com", password: "koplop")
 
+100.times do 
+    User.create(
+            full_name: Faker::Name.name,
+            email: Faker::Internet.email,
+            password: "koplop"
+        )
+end
+
 10.times do 
   Video.create(title: "Family Guy", 
              description: "Family guy volume 2", 
@@ -30,3 +38,6 @@ Category.create(name: "Documentary")
 Category.create(name: "Foreign")
 
 Review.create(content: Faker::Lorem.paragraph(5), rating: 5, user_id: 1, video_id:10)
+100.times do 
+    Review.create(content: Faker::Lorem.paragraph(5), rating: rand(1..5), user_id: rand(1..80), video_id: rand(1..10))
+end

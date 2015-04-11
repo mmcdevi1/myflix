@@ -15,14 +15,16 @@ Myflix::Application.routes.draw do
 
   resources :categories
 
+  get 'people', to: "users#people"
   get 'register', to: "users#new"
   get 'login', to: "sessions#new"
   get 'logout', to: "sessions#destroy"
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   resources :sessions, only: [:create]
 
   get 'queue', to: "queue_items#index"
   resources :queue_items, only: [:create, :destroy]
+
 
   post 'update_queue', to: 'queue_items#update_queue'
 end

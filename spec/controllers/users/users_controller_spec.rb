@@ -1,11 +1,34 @@
 require 'spec_helper'
 
 describe UsersController do
+  let(:user) { Fabricate(:user) }
 
   describe "GET new" do 
     it "sets @user" do 
       get :new
       expect(assigns(:user)).to be_instance_of(User)
+    end
+  end
+
+  describe "GET show" do 
+    context "authenticated users" do 
+      before do 
+        session[:user_id] = user.id
+      end
+
+      it "sets @user" do 
+        get :show, id: user.id
+        expect(assigns(:user)).to eq(user)
+      end
+
+      it "renders the show template" do 
+        get :show, id: user.id 
+        expect(response).to render_template 'show'
+      end
+    end
+
+    context "unauthenticated users" do 
+
     end
   end
 
