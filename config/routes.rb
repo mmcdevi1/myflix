@@ -15,7 +15,6 @@ Myflix::Application.routes.draw do
 
   resources :categories
 
-  get 'people', to: "users#people"
   get 'register', to: "users#new"
   get 'login', to: "sessions#new"
   get 'logout', to: "sessions#destroy"
@@ -24,6 +23,9 @@ Myflix::Application.routes.draw do
 
   get 'queue', to: "queue_items#index"
   resources :queue_items, only: [:create, :destroy]
+
+  get 'people', to: "relationships#index"
+  resources :relationships, only: [:create, :destroy]
 
 
   post 'update_queue', to: 'queue_items#update_queue'
