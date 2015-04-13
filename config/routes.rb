@@ -18,8 +18,14 @@ Myflix::Application.routes.draw do
   get 'register', to: "users#new"
   get 'login', to: "sessions#new"
   get 'logout', to: "sessions#destroy"
+  get 'forgot_password', to: "forgot_passwords#new"
+  get 'forgot_password_confirmation', to: "forgot_passwords#confirm"
+  resources 'forgot_passwords', only: [:create]
   resources :users, only: [:create, :show]
   resources :sessions, only: [:create]
+
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'password_resets#expired_token'
 
   get 'queue', to: "queue_items#index"
   resources :queue_items, only: [:create, :destroy]
