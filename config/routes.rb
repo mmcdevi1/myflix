@@ -16,6 +16,7 @@ Myflix::Application.routes.draw do
   resources :categories
 
   get 'register', to: "users#new"
+  get 'register/:token', to: "users#new_with_invitation_token", as: 'register_with_token'
   get 'login', to: "sessions#new"
   get 'logout', to: "sessions#destroy"
   get 'forgot_password', to: "forgot_passwords#new"
@@ -35,4 +36,6 @@ Myflix::Application.routes.draw do
 
 
   post 'update_queue', to: 'queue_items#update_queue'
+
+  resources :invitations, only: [:new, :create]
 end

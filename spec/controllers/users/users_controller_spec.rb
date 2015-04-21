@@ -34,6 +34,8 @@ describe UsersController do
 
   describe "POST create" do 
     context "with valid input" do 
+      after { ActionMailer::Base.deliveries.clear }
+
       before do 
         post :create, user: Fabricate.attributes_for(:user)
       end
@@ -45,6 +47,16 @@ describe UsersController do
       it "redirects to the sign in page" do 
         expect(response).to redirect_to login_path
       end
+
+      # it "allows the user to follow the inviter" do 
+      #   invitation = Fabricate(:invitation, inviter: user, recipient_email: 'joe@smith.com')
+      #   post :create, user: { email: "joe@smith.com", password: "password" }, invitation_token: invitation.token
+      #   joe = User.where(email: "joe@smith.com").first
+      #   expect(joe.follows?(user)).to be_true
+      # end
+
+      it "allows the inviter to follow the user"
+      it "expires the invitation upon acceptance"
 
       context "email sending" do 
         it "sends out the email" do 
@@ -83,6 +95,30 @@ describe UsersController do
       it "does not send an email" do 
         expect(ActionMailer::Base.deliveries).to be_empty
       end
+    end
+  end
+
+  describe "GET new_with_invitation_token" do 
+    let(:invitation) { Fabricate(:invitation) }
+
+    it "renders the new view template" do 
+      get :new_with_invitation_token, token: invitation.token
+      expect(response).to render_template :new
+    end
+
+    it "sets @user with recipient email" do 
+      get :new_with_invitation_token, token: invitation.token
+      expect(assigns(:user).email).to eq(invitation.recipient_email)
+    end
+
+    it "sets @invitation_token" do 
+      get :new_with_invitation_token, token: invitation.token
+      expect(assigns(:invitation_token)).to eq(invitation.token)
+    end
+
+    it "redirects to expired token page for invalid tokens" do 
+      get :new_with_invitation_token, token: "hasdf"
+      expect(response).to redirect_to expired_token_path
     end
   end
 
