@@ -38,4 +38,8 @@ Myflix::Application.routes.draw do
   post 'update_queue', to: 'queue_items#update_queue'
 
   resources :invitations, only: [:new, :create]
+
+  namespace :admin do 
+    resources :videos, only: [:new]
+  end
 end
