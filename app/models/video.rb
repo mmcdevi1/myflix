@@ -9,6 +9,12 @@ class Video < ActiveRecord::Base
 
   before_create :generate_token
 
+  has_attached_file :image, styles: {
+    large: "665x375#",
+    thumb: "166x236#"
+  }
+  validates_attachment_content_type :image, :content_type => /\Aimage/
+
   def self.search_by_title(search_term)
     return [] if search_term.blank?
     where("title LIKE ?", "%#{search_term}%").order("created_at DESC")

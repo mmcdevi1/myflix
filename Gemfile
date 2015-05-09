@@ -13,6 +13,7 @@ gem 'bootstrap_form'
 gem 'bcrypt-ruby'
 gem 'faker'
 gem 'fabrication'
+gem 'paperclip'
 
 group :development do
   gem 'thin'
